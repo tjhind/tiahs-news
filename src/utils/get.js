@@ -10,3 +10,14 @@ export function getTenArticles() {
       console.log(err);
     });
 }
+
+export function getArticleById(articleId) {
+  return axios
+    .get(`https://news-rpsp.onrender.com/api/articles/${articleId}`)
+    .then((response) => {
+      return response.data.article;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
