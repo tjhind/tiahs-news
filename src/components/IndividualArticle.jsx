@@ -31,7 +31,7 @@ export default function IndividualArticle() {
       <Box className="individual-article-box">
         <img
           src={articleDetails.article_img_url}
-          alt={articleDetails.title}
+          alt={`stock image to do with ${articleDetails.topic}`}
         ></img>
       </Box>
       <Box className="individual-article-box">
