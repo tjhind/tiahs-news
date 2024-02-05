@@ -1,4 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function ArticleCards({ article }) {
   return (
@@ -9,7 +10,9 @@ export default function ArticleCards({ article }) {
       <Typography variant="h6">
         <p className="author">{article.author}</p>
       </Typography>
-      <Button variant="contained">Read More</Button>
+      <Link to={`/articles/${article.article_id}`}>
+        <Button variant="contained">Read More</Button>
+      </Link>
     </Box>
   );
 }

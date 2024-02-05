@@ -13,6 +13,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<HomepageManager />} />
+          <Route path="articles/:article_id" element={<IndividualArticle />} />
         </Routes>
       </Container>
     </>
