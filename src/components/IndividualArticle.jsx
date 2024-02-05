@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getArticleById } from "../utils/get";
 import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
+import CommentList from "./CommentList";
+import { getCommentsById } from "../utils/get";
 
 export default function IndividualArticle() {
   const [articleDetails, setArticleDetails] = useState([]);
@@ -9,6 +11,13 @@ export default function IndividualArticle() {
   useEffect(() => {
     getArticleById(article_id).then((response) => {
       setArticleDetails(response);
+    });
+  }, [article_id]);
+
+  const [commentsList, setCommentsList] = useState([]);
+  useEffect(() => {
+    getCommentsById(article_id).then((response) => {
+      setCommentsList(response);
     });
   }, [article_id]);
 
@@ -40,7 +49,7 @@ export default function IndividualArticle() {
           <h4>Comments: {articleDetails.comment_count}</h4>
         </Typography>
       </Box>
-      {/* <CommentList /> */}
+      <CommentList commentsList={commentsList} />
     </Box>
   );
 }
