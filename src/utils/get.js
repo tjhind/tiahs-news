@@ -1,8 +1,9 @@
 import axios from "axios";
+const newsApi = axios.create({ baseURL: "https://news-rpsp.onrender.com/api" });
 
 export function getTenArticles() {
-  return axios
-    .get("https://news-rpsp.onrender.com/api/articles/?limit=10")
+  return newsApi
+    .get("/articles/?limit=10")
     .then((response) => {
       return response.data.articles;
     })
@@ -12,8 +13,8 @@ export function getTenArticles() {
 }
 
 export function getArticleById(articleId) {
-  return axios
-    .get(`https://news-rpsp.onrender.com/api/articles/${articleId}`)
+  return newsApi
+    .get(`/articles/${articleId}`)
     .then((response) => {
       return response.data.article;
     })
