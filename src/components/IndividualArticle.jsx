@@ -23,7 +23,7 @@ export default function IndividualArticle() {
     getCommentsById(article_id).then((response) => {
       setCommentsList(response);
     });
-  }, [commentsList]);
+  }, [commentsList || articleDetails.comment_count]);
 
   if (loading) return <Loading />;
 

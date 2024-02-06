@@ -15,6 +15,7 @@ export default function CommentAdder({
   const [newCommentArticleId, setNewCommentArticleId] = useState(articleId);
   const [err, setErr] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -27,12 +28,14 @@ export default function CommentAdder({
     {
       newCommentObject.body.length < 10
         ? setErr("Error: Please type in a comment of at least 10 characters")
-        : setSuccess("Your comment has been posted!");
+        : null;
     }
-    if (success && !err) {
+    if (!err) {
+      setIsDisabled(true);
       postNewComment(newCommentArticleId, newCommentObject)
         .then(() => {
           setSuccess("Your comment has been posted!");
+          setIsDisabled(false);
         })
         .catch((err) => {
           if (err.message.includes("Bad request")) {
@@ -57,10 +60,19 @@ export default function CommentAdder({
             value={newCommentBody}
             onChange={(event) => setNewCommentBody(event.target.value)}
           ></input>
-          {success ? <p>{success}</p> : null}
-          {err ? <p>{err}</p> : null}
-          <button className="submitButton">Submit</button>
+
+          {isDisabled ? (
+            <button disabled={true} className="submitButton">
+              Submit
+            </button>
+          ) : (
+            <button disabled={false} className="submitButton">
+              Submit
+            </button>
+          )}
         </form>
+        {success ? <p>{success}</p> : null}
+        {err ? <p>{err}</p> : null}
       </Box>
     </>
   );
