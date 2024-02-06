@@ -9,7 +9,7 @@ export default function NavBar() {
       <Link
         to={`/`}
         key="Home-link"
-        onClick={() => (window.location.href = "/")}
+        // onClick={() => (window.location.href = "/")}
       >
         Home
       </Link>
