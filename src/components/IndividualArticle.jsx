@@ -5,6 +5,7 @@ import { Box, Typography } from "@mui/material";
 import CommentList from "./CommentList";
 import { getCommentsById } from "../utils/get";
 import ArticleVotes from "./ArticleVotes";
+import CommentAdder from "./CommentAdder";
 export default function IndividualArticle() {
   const [articleDetails, setArticleDetails] = useState([]);
   const [commentsList, setCommentsList] = useState([]);
@@ -14,13 +15,13 @@ export default function IndividualArticle() {
     getArticleById(article_id).then((response) => {
       setArticleDetails(response);
     });
-  }, [article_id || articleDetails.votes]);
+  }, [article_id || articleDetails.votes || articleDetails.comment_count]);
 
   useEffect(() => {
     getCommentsById(article_id).then((response) => {
       setCommentsList(response);
     });
-  }, [article_id || articleDetails.votes]);
+  }, [commentsList]);
 
   return (
     <Box className="individual-article-container">
@@ -51,6 +52,11 @@ export default function IndividualArticle() {
         </Typography>
       </Box>
       <ArticleVotes articleId={article_id} votes={articleDetails.votes} />
+      <CommentAdder
+        articleId={article_id}
+        setCommentsList={setCommentsList}
+        commentsList={commentsList}
+      />
       <CommentList commentsList={commentsList} />
     </Box>
   );
