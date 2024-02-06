@@ -9,7 +9,7 @@ import UserContext from "./contexts/UserContext";
 import { useState } from "react";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({ username: null });
+  const [loggedInUser, setLoggedInUser] = useState({ username: "grumpy19" });
 
   return (
     <>
