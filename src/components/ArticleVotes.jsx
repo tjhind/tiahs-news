@@ -61,6 +61,7 @@ export default function ArticleVotes({ votes, articleId }) {
   return (
     <>
       {" "}
+      {err ? <p>{err}</p> : null}{" "}
       <Box className="individual-article-box">
         <Typography variant="h6">
           <>Votes: {articleVotes}</>
@@ -80,7 +81,6 @@ export default function ArticleVotes({ votes, articleId }) {
         ) : (
           <button onClick={handleClickUndoUpvote}> UNDO</button>
         )}
-        {err ? <p>{err}</p> : null}
       </Box>
       <Box className="individual-article-box">
         {" "}
@@ -94,7 +94,6 @@ export default function ArticleVotes({ votes, articleId }) {
         ) : (
           <button onClick={handleClickUndoDownvote}> UNDO</button>
         )}
-        {err ? <p>{err}</p> : null}
       </Box>
     </>
   );

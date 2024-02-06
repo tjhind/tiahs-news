@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { getArticleById } from "../utils/get";
+import { getArticleById, getCommentsById } from "../utils/get";
 import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import CommentList from "./CommentList";
-import { getCommentsById } from "../utils/get";
 import ArticleVotes from "./ArticleVotes";
 import CommentAdder from "./CommentAdder";
+import Loading from "./Loading";
 export default function IndividualArticle() {
   const [articleDetails, setArticleDetails] = useState([]);
   const [commentsList, setCommentsList] = useState([]);
   const { article_id } = useParams();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getArticleById(article_id).then((response) => {
       setArticleDetails(response);
+      setLoading(false);
     });
   }, [article_id || articleDetails.votes || articleDetails.comment_count]);
 
@@ -22,6 +24,8 @@ export default function IndividualArticle() {
       setCommentsList(response);
     });
   }, [commentsList]);
+
+  if (loading) return <Loading />;
 
   return (
     <Box className="individual-article-container">

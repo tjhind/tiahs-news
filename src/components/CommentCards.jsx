@@ -1,4 +1,4 @@
-import { Box, Typography, Paper } from "@mui/material";
+import { Box, Typography, Paper, Button } from "@mui/material";
 
 export default function CommentCards({ comment }) {
   return (
@@ -11,6 +11,7 @@ export default function CommentCards({ comment }) {
           <p className="author">{comment.author}</p>
         </Typography>
       </Paper>
+      <Button className="delete-button"></Button>
     </Box>
   );
 }
