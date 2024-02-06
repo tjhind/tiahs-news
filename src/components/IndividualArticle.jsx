@@ -61,7 +61,10 @@ export default function IndividualArticle() {
         setCommentsList={setCommentsList}
         commentsList={commentsList}
       />
-      <CommentList commentsList={commentsList} />
+      <CommentList
+        commentsList={commentsList}
+        setCommentsList={setCommentsList}
+      />
     </Box>
   );
 }

@@ -1,13 +1,13 @@
 import axios from "axios";
 const newsApi = axios.create({ baseURL: "https://news-rpsp.onrender.com/api" });
 
-export function postNewComment(articleId, reqBody) {
+export function deleteOwnComment(commentId) {
   return newsApi
-    .post(`/articles/${articleId}/comments`, reqBody)
+    .delete(`/comments/${commentId}`)
     .then((response) => {
-      return response.data.new_comment;
+      return response;
     })
     .catch((err) => {
-      console.log(err.message);
+      console.log(err);
     });
 }
