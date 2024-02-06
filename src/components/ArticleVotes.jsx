@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { upvoteArticle } from "../utils/patch";
 
 export default function ArticleVotes({ votes, articleId }) {
-  const [err, setErr] = useState("null");
+  const [err, setErr] = useState(null);
   const [articleVotes, setArticleVotes] = useState(0);
   const [upvoteClicked, setUpvoteClicked] = useState(false);
   const [downvoteClicked, setDownvoteClicked] = useState(false);
@@ -60,8 +60,6 @@ export default function ArticleVotes({ votes, articleId }) {
 
   return (
     <>
-      {" "}
-      {err ? <p>{err}</p> : null}{" "}
       <Box className="individual-article-box">
         <Typography variant="h6">
           <>Votes: {articleVotes}</>
@@ -69,6 +67,7 @@ export default function ArticleVotes({ votes, articleId }) {
       </Box>
       <Box className="individual-article-box">
         {" "}
+        {err ? <p>{err}</p> : null}
         {upvoteClicked === false && downvoteClicked === false ? (
           <>
             <button onClick={handleClickUpvote}> UPVOTE ARTICLE (+1)</button>

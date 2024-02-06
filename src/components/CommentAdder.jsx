@@ -21,6 +21,7 @@ export default function CommentAdder({
     let newCommentObject = {};
     newCommentObject.body = newCommentBody;
     newCommentObject.username = newCommentAuthor;
+    newCommentObject.votes = 0;
     setCommentsList([...commentsList], [newCommentObject]);
     setErr(null);
     {
@@ -28,10 +29,18 @@ export default function CommentAdder({
         ? setErr("Error: Please type in a comment of at least 10 characters")
         : setSuccess("Your comment has been posted!");
     }
-    if (err !== null) {
-      postNewComment(newCommentArticleId, newCommentObject).catch((err) => {
-        setErr("Could not post comment");
-      });
+    if (success && !err) {
+      postNewComment(newCommentArticleId, newCommentObject)
+        .then(() => {
+          setSuccess("Your comment has been posted!");
+        })
+        .catch((err) => {
+          if (err.message.includes("Bad request")) {
+            setErr("Invalid post request");
+          } else {
+            setErr("Could not post comment. Please try again");
+          }
+        });
     }
     setNewCommentBody("");
   }
