@@ -4,28 +4,29 @@ import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import CommentList from "./CommentList";
 import { getCommentsById } from "../utils/get";
-
+import ArticleVotes from "./ArticleVotes";
 export default function IndividualArticle() {
   const [articleDetails, setArticleDetails] = useState([]);
+  const [commentsList, setCommentsList] = useState([]);
   const { article_id } = useParams();
+
   useEffect(() => {
     getArticleById(article_id).then((response) => {
       setArticleDetails(response);
     });
-  }, [article_id]);
+  }, [article_id || articleDetails.votes]);
 
-  const [commentsList, setCommentsList] = useState([]);
   useEffect(() => {
     getCommentsById(article_id).then((response) => {
       setCommentsList(response);
     });
-  }, [article_id]);
+  }, [article_id || articleDetails.votes]);
 
   return (
     <Box className="individual-article-container">
       <Box className="individual-article-box">
-        <Typography>
-          <h2>{articleDetails.title}</h2>
+        <Typography variant="h4">
+          <>{articleDetails.title}</>
         </Typography>
       </Box>{" "}
       <Box className="individual-article-box">
@@ -35,20 +36,21 @@ export default function IndividualArticle() {
         ></img>
       </Box>
       <Box className="individual-article-box">
-        <Typography>
-          <h4>{articleDetails.body}</h4>
+        <Typography variant="h6">
+          <>{articleDetails.body}</>
+        </Typography>
+      </Box>
+      <Box className="individual-article-box">
+        <Typography variant="h6">
+          <>Author: {articleDetails.author}</>
         </Typography>
       </Box>
       <Box className="individual-article-box">
         <Typography>
-          <h2>Author: {articleDetails.author}</h2>
+          <>Comments: {articleDetails.comment_count}</>
         </Typography>
       </Box>
-      <Box className="individual-article-box">
-        <Typography>
-          <h4>Comments: {articleDetails.comment_count}</h4>
-        </Typography>
-      </Box>
+      <ArticleVotes articleId={article_id} votes={articleDetails.votes} />
       <CommentList commentsList={commentsList} />
     </Box>
   );
