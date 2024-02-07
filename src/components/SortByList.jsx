@@ -6,33 +6,71 @@ export default function SortByList({
   setSortTopic,
   setSortBy,
   sortByList,
-  sort_by,
 }) {
   return (
     <Grid xs={12} md={6}>
-      <Box className="sort-by-box">SortBy List</Box>
-      <h2>Categories:</h2>
-      <ul>
+      <Box className="sort-by-box">
+        <h2>Topics:</h2>
         {topicList.map((topic, i) => {
           const topicName =
             topic.slug[0].toUpperCase() +
             topic.slug.slice(1, topic.length).toLowerCase();
           return (
-            <>
-              {" "}
-              <button
-                className="topic-button"
-                key={i}
-                onClick={() => setSortTopic(topic.slug)}
-              >
-                {topicName}
-              </button>
-            </>
+            <button
+              className="topic-button"
+              key={`topic${i}`}
+              onClick={() => setSortTopic(topic.slug)}
+            >
+              {topicName}
+            </button>
           );
         })}
-
-      </ul>
-      <Box className="sort-by-box">SortBy Price</Box>
+        <>
+          <h2 key="sortByHeader">Sort By:</h2>{" "}
+          <button
+            className="sort-by-button"
+            key="sortBy4"
+            onClick={() => setSortBy(sortByList[3])}
+          >
+            Default: Date Written
+          </button>
+          <button
+            className="sort-by-button"
+            key="sortBy1"
+            onClick={() => setSortBy(sortByList[0])}
+          >
+            Title
+          </button>
+          <button
+            className="sort-by-button"
+            key="sortBy2"
+            onClick={() => setSortBy(sortByList[1])}
+          >
+            Author
+          </button>
+          <button
+            className="sort-by-button"
+            key="sortBy3"
+            onClick={() => setSortBy(sortByList[2])}
+          >
+            Topic
+          </button>
+          <button
+            className="sort-by-button"
+            key="sortBy5"
+            onClick={() => setSortBy(sortByList[4])}
+          >
+            Votes
+          </button>
+          <button
+            className="sort-by-button"
+            key="sortBy6"
+            onClick={() => setSortBy(sortByList[5])}
+          >
+            Comment count
+          </button>
+        </>
+      </Box>
     </Grid>
   );
 }
