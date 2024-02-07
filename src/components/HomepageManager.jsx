@@ -12,7 +12,14 @@ export default function HomepageManager() {
   const [topicList, setTopicList] = useState([]);
   const [topicSearchTerm, setTopicSearchTerm] = useSearchParams();
   const [sortByTerm, setSortByTerm] = useSearchParams();
-  const sortByList = ["Title", "Author" ]
+  const sortByList = [
+    "title",
+    "author",
+    "topic",
+    "created_at",
+    "votes",
+    "comment_count",
+  ];
 
   const limit = "10";
   const topic = topicSearchTerm.get("topic");
@@ -25,7 +32,7 @@ export default function HomepageManager() {
   };
 
   const setSortBy = (sort_by) => {
-    const newSortBy = new URLSearchParams(searchTerm);
+    const newSortBy = new URLSearchParams(sortByTerm);
     newSortBy.set("sort_by", sort_by);
     setSortByTerm(newSortBy);
   };
@@ -42,13 +49,18 @@ export default function HomepageManager() {
       setArticleList(response);
       setLoading(false);
     });
-  }, [topic]);
+  }, [topic, sort_by]);
 
   if (loading) return <Loading />;
 
   return (
     <Grid container spacing={2} className="homepage-container">
-      <SortByList topicList={topicList} setSortTopic={setSortTopic} />
+      <SortByList
+        topicList={topicList}
+        setSortTopic={setSortTopic}
+        sortByList={sortByList}
+        setSortBy={setSortBy}
+      />
       <ArticleList articleList={articleList} topic={topic} />
     </Grid>
   );
