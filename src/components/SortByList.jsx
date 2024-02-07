@@ -25,7 +25,7 @@ export default function SortByList({
             }}
             className="sort-by-dropdown"
           >
-            <MenuItem value="created_at">Default: Date (most recent)</MenuItem>
+            <MenuItem value="created_at">Default: Date</MenuItem>
             <MenuItem value="author">Author</MenuItem>
             <MenuItem value="title">Title</MenuItem>
             <MenuItem value="votes">Votes</MenuItem>
@@ -53,17 +53,26 @@ export default function SortByList({
           <h2>Order by:</h2>
           <button
             className="sortby-button"
-            key="order1"
-            onClick={() => setSortOrder("asc")}
-          >
-            Ascending
-          </button>
-          <button
-            className="sortby-button"
             key="order2"
             onClick={() => setSortOrder("desc")}
           >
-            Descending
+            {sort_by === "created_at" || !sort_by
+              ? "Default: Newest first"
+              : sort_by === "votes"
+              ? "Most to least votes"
+              : "Z-A"}
+          </button>
+          <button
+            className="sortby-button"
+            key="order1"
+            onClick={() => setSortOrder("asc")}
+          >
+            {" "}
+            {sort_by === "created_at" || !sort_by
+              ? "Oldest First"
+              : sort_by === "votes"
+              ? "Least to most votes"
+              : "A-Z"}
           </button>
         </Box>
       </Grid>

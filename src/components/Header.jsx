@@ -1,10 +1,12 @@
-import { Container, Box } from "@mui/material";
+import { Container, Box, Typography } from "@mui/material";
 
 export default function Header() {
   return (
     <Container id="header">
       <Box className="header">
-        <h1>Tiah's News</h1>
+        <Typography variant="h1" fontWeight={400}>
+          Tiah's News
+        </Typography>
       </Box>
     </Container>
   );
