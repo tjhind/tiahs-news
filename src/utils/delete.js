@@ -8,6 +8,6 @@ export function deleteOwnComment(commentId) {
       return response;
     })
     .catch((err) => {
-      console.log(err);
+      return err;
     });
 }
