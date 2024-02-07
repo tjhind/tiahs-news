@@ -1,29 +1,28 @@
 import ArticleCards from "./ArticleCards";
-import { Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import Loading from "./Loading";
-import { useState } from "react";
+import { Container, Box } from "@mui/material";
 
 export default function ArticleList({ articleList, topic }) {
   return (
-    <>
-      <Grid xs={4}>
-        {" "}
+    <Container id="article-list-container">
+      <Box className="article-list-box">
         {topic ? (
-          <Typography variant="h5">
+          <h5>
             {topic[0].toUpperCase() +
               topic.slice(1, topic.length).toLowerCase()}{" "}
             Articles
-          </Typography>
+          </h5>
         ) : (
-          <Typography variant="h5">10 latest articles</Typography>
+          <h5>10 latest articles</h5>
         )}
+      </Box>
+      <Grid className="article-list-grid" xs={12}>
+        <ol id="article-list">
+          {articleList.map((article, i) => {
+            return <ArticleCards key={i} article={article} />;
+          })}
+        </ol>
       </Grid>{" "}
-      <ol id="article-list">
-        {articleList.map((article, i) => {
-          return <ArticleCards key={i} article={article} />;
-        })}
-      </ol>
-    </>
+    </Container>
   );
 }

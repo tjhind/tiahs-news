@@ -23,26 +23,28 @@ export default function CommentAdder({
     newCommentObject.body = newCommentBody;
     newCommentObject.username = newCommentAuthor;
     newCommentObject.votes = 0;
-    setCommentsList([...commentsList], [newCommentObject]);
-    setErr(null);
+
     {
       newCommentObject.body.length < 10
         ? setErr("Error: Please type in a comment of at least 10 characters")
         : null;
     }
     if (!err) {
-      setIsDisabled(true);
       postNewComment(newCommentArticleId, newCommentObject)
-        .then(() => {
+        .then((response) => {
+          setIsDisabled(true);
+          if (response.message === "Network Error") {
+            setErr("Could not connect. Please try again");
+          }
           setSuccess("Your comment has been posted!");
+          setCommentsList([...commentsList], [newCommentObject]);
           setIsDisabled(false);
         })
         .catch((err) => {
-          if (err.message.includes("Bad request")) {
-            setErr("Invalid post request");
-          } else {
-            setErr("Could not post comment. Please try again");
-          }
+          setIsDisabled(false);
+          setErr(
+            "Could not post comment. Please refresh the page and try again"
+          );
         });
     }
     setNewCommentBody("");

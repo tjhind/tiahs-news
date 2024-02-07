@@ -18,7 +18,7 @@ export default function ArticleVotes({ votes, articleId }) {
     setUpvoteClicked(true);
     setUndoClicked(false);
     upvoteArticle(articleId, { inc_votes: 1 }).catch((err) => {
-      setArticleVotes(articleVotes);
+      setArticleVotes(articleVotes - 1);
       setUpvoteClicked(false);
       setErr("Cannot change votes. Please try again");
     });
@@ -29,7 +29,7 @@ export default function ArticleVotes({ votes, articleId }) {
     setDownvoteClicked(true);
     setUndoClicked(false);
     upvoteArticle(articleId, { inc_votes: -1 }).catch((err) => {
-      setArticleVotes(articleVotes);
+      setArticleVotes(articleVotes + 1);
       setDownvoteClicked(false);
       setErr("Cannot change votes. Please try again");
     });
@@ -41,8 +41,7 @@ export default function ArticleVotes({ votes, articleId }) {
     setUndoClicked(true);
     setUpvoteClicked(false);
     upvoteArticle(articleId, { inc_votes: -1 }).catch((err) => {
-      setArticleVotes(articleVotes);
-      setDownvoteClicked(false);
+      setArticleVotes(articleVotes + 1);
       setErr("Cannot change votes. Please try again");
     });
   };
@@ -51,9 +50,8 @@ export default function ArticleVotes({ votes, articleId }) {
     setErr(null);
     setUndoClicked(true);
     setDownvoteClicked(false);
-    upvoteArticle(articleId, { inc_votes: -1 }).catch((err) => {
-      setArticleVotes(articleVotes);
-      setDownvoteClicked(false);
+    upvoteArticle(articleId, { inc_votes: +1 }).catch((err) => {
+      setArticleVotes(articleVotes - 1);
       setErr("Cannot change votes. Please try again");
     });
   };
@@ -84,7 +82,7 @@ export default function ArticleVotes({ votes, articleId }) {
       <Box className="individual-article-box">
         {" "}
         {downvoteClicked === false && upvoteClicked === false ? (
-          <button onClick={handleClickDownvote}> DOWNVOTE ARTICLE (+1)</button>
+          <button onClick={handleClickDownvote}> DOWNVOTE ARTICLE (-1)</button>
         ) : downvoteClicked === false && upvoteClicked === true ? (
           <button disabled={true} onClick={handleClickDownvote}>
             {" "}

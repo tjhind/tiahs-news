@@ -11,25 +11,25 @@ export default function CommentCards({
   setCommentsList,
 }) {
   const [err, setErr] = useState(null);
+  const [success, setSuccess] = useState(null);
   const { username } = useContext(UserContext);
   const [disabled, setDisabled] = useState(false);
 
   function handleClick() {
     setDisabled(true);
-    setCommentsList(
-      commentsList.filter((item) => {
-        item.comment_id !== comment.comment_id;
-      })
-    );
+
     deleteOwnComment(comment.comment_id).then((response) => {
+      setCommentsList(
+        commentsList.filter((item) => item.comment_id !== comment.comment_id)
+      );
       setDisabled(false);
       if (response.code === "ERR_BAD_REQUEST") {
-        alert("Could not delete comment!");
-      } else alert("Comment successfully deleted!");
+        setErr("Could not delete comment! Please try again.");
+      } else setSuccess("Comment successfully deleted!");
     });
   }
   if (err) return <p>{err}</p>;
-
+  if (success) return <p>{success}</p>;
   return (
     <Box className="comment-box">
       <Paper elevation={3}>
@@ -40,7 +40,7 @@ export default function CommentCards({
           <p className="author">{comment.author}</p>
         </Typography>
       </Paper>
-      {comment.author === username && disabled === false ? (
+      {comment.author === username ? (
         <Button
           disabled={disabled}
           className="delete-button"

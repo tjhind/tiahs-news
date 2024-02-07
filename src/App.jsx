@@ -1,4 +1,3 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
@@ -13,7 +12,7 @@ function App() {
 
   return (
     <>
-      <Container className="page-container">
+      <Container id="page-container">
         <UserContext.Provider
           value={{ username: loggedInUser.username, setLoggedInUser }}
         >

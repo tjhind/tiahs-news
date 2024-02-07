@@ -11,20 +11,23 @@ export default function IndividualArticle() {
   const [commentsList, setCommentsList] = useState([]);
   const { article_id } = useParams();
   const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
 
   useEffect(() => {
-    getArticleById(article_id).then((response) => {
-      setArticleDetails(response);
-      setLoading(false);
-    });
-  }, [article_id || articleDetails.votes || articleDetails.comment_count]);
-
-  useEffect(() => {
+    getArticleById(article_id)
+      .then((response) => {
+        setArticleDetails(response);
+      })
+      .catch((err) => {
+        setErr("Could not connect. Please try again");
+      });
     getCommentsById(article_id).then((response) => {
       setCommentsList(response);
     });
-  }, [commentsList || articleDetails.comment_count]);
+    setLoading(false);
+  }, [commentsList]);
 
+  if (err) return <p>{err}</p>;
   if (loading) return <Loading />;
 
   return (

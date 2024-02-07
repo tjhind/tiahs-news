@@ -2,7 +2,6 @@ import { getAllArticles, getAllTopics } from "../utils/get";
 import { useState, useEffect } from "react";
 import ArticleList from "./ArticleList";
 import SortByList from "./SortByList";
-import Grid from "@mui/material/Unstable_Grid2";
 import Loading from "./Loading";
 import { useSearchParams } from "react-router-dom";
 
@@ -54,7 +53,7 @@ export default function HomepageManager() {
   if (loading) return <Loading />;
 
   return (
-    <Grid container spacing={2} className="homepage-container">
+    <>
       <SortByList
         topicList={topicList}
         setSortTopic={setSortTopic}
@@ -64,6 +63,6 @@ export default function HomepageManager() {
         setSortOrder={setSortOrder}
       />
       <ArticleList articleList={articleList} topic={topic} />
-    </Grid>
+    </>
   );
 }
