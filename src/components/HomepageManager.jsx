@@ -12,18 +12,12 @@ export default function HomepageManager() {
   const [topicList, setTopicList] = useState([]);
   const [topicSearchTerm, setTopicSearchTerm] = useSearchParams();
   const [sortByTerm, setSortByTerm] = useSearchParams();
-  const sortByList = [
-    "title",
-    "author",
-    "topic",
-    "created_at",
-    "votes",
-    "comment_count",
-  ];
+  const [orderByTerm, setOrderByTerm] = useSearchParams();
 
   const limit = "10";
   const topic = topicSearchTerm.get("topic");
   const sort_by = sortByTerm.get("sort_by");
+  const order = sortByTerm.get("order");
 
   const setSortTopic = (topic) => {
     const newTopicTerm = new URLSearchParams(topicSearchTerm);
@@ -37,6 +31,12 @@ export default function HomepageManager() {
     setSortByTerm(newSortBy);
   };
 
+  const setSortOrder = (order) => {
+    const newSortOrder = new URLSearchParams(orderByTerm);
+    newSortOrder.set("order", order);
+    setOrderByTerm(newSortOrder);
+  };
+
   useEffect(() => {
     getAllTopics().then((response) => {
       setTopicList(response);
@@ -45,11 +45,11 @@ export default function HomepageManager() {
   }, [articleList]);
 
   useEffect(() => {
-    getAllArticles(limit, topic, sort_by).then((response) => {
+    getAllArticles(limit, topic, sort_by, order).then((response) => {
       setArticleList(response);
       setLoading(false);
     });
-  }, [topic, sort_by]);
+  }, [topic, sort_by, order]);
 
   if (loading) return <Loading />;
 
@@ -58,8 +58,10 @@ export default function HomepageManager() {
       <SortByList
         topicList={topicList}
         setSortTopic={setSortTopic}
-        sortByList={sortByList}
         setSortBy={setSortBy}
+        sort_by={sort_by}
+        order={order}
+        setSortOrder={setSortOrder}
       />
       <ArticleList articleList={articleList} topic={topic} />
     </Grid>

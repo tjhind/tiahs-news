@@ -1,10 +1,10 @@
 import axios from "axios";
 const newsApi = axios.create({ baseURL: "https://news-rpsp.onrender.com/api" });
 
-export function getAllArticles(limit, topic, sort_by) {
+export function getAllArticles(limit, topic, sort_by, order) {
   return newsApi
     .get("/articles/", {
-      params: { limit: limit, topic: topic, sort_by: sort_by },
+      params: { limit: limit, topic: topic, sort_by: sort_by, order: order },
     })
     .then((response) => {
       return response.data.articles;

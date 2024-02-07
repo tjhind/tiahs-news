@@ -1,15 +1,38 @@
-import { Box } from "@mui/material";
+import { Box, Select, MenuItem } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 
 export default function SortByList({
   topicList,
   setSortTopic,
   setSortBy,
-  sortByList,
+  sort_by,
+  order,
+  setSortOrder,
 }) {
   return (
     <Grid xs={12} md={6}>
       <Box className="sort-by-box">
+        <h2>Sort by:</h2>
+        <Select
+          value={sort_by || "created_at"}
+          sx={{
+            marginTop: 0,
+            width: 250,
+            height: 50,
+          }}
+          onChange={(e) => {
+            setSortBy(e.target.value);
+          }}
+          className="select-sort-by"
+        >
+          <MenuItem value="created_at">Default: Date (most recent)</MenuItem>
+          <MenuItem value="author">Author</MenuItem>
+          <MenuItem value="title">Title</MenuItem>
+          <MenuItem value="votes">Votes</MenuItem>
+          <MenuItem value="comment_count">Comments</MenuItem>
+        </Select>
+      </Box>
+      <Box className="topics-box">
         <h2>Topics:</h2>
         {topicList.map((topic, i) => {
           const topicName =
@@ -25,51 +48,23 @@ export default function SortByList({
             </button>
           );
         })}
-        <>
-          <h2 key="sortByHeader">Sort By:</h2>{" "}
-          <button
-            className="sort-by-button"
-            key="sortBy4"
-            onClick={() => setSortBy(sortByList[3])}
-          >
-            Default: Date Written
-          </button>
-          <button
-            className="sort-by-button"
-            key="sortBy1"
-            onClick={() => setSortBy(sortByList[0])}
-          >
-            Title
-          </button>
-          <button
-            className="sort-by-button"
-            key="sortBy2"
-            onClick={() => setSortBy(sortByList[1])}
-          >
-            Author
-          </button>
-          <button
-            className="sort-by-button"
-            key="sortBy3"
-            onClick={() => setSortBy(sortByList[2])}
-          >
-            Topic
-          </button>
-          <button
-            className="sort-by-button"
-            key="sortBy5"
-            onClick={() => setSortBy(sortByList[4])}
-          >
-            Votes
-          </button>
-          <button
-            className="sort-by-button"
-            key="sortBy6"
-            onClick={() => setSortBy(sortByList[5])}
-          >
-            Comment count
-          </button>
-        </>
+      </Box>
+      <Box className="order-box">
+        <h2>Order by:</h2>
+        <button
+          className="topic-button"
+          key="order1"
+          onClick={() => setSortOrder("asc")}
+        >
+          Ascending
+        </button>
+        <button
+          className="topic-button"
+          key="order2"
+          onClick={() => setSortOrder("desc")}
+        >
+          Descending
+        </button>
       </Box>
     </Grid>
   );
