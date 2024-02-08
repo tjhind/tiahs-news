@@ -1,7 +1,13 @@
-* {
-  font-family: "Roboto", sans-serif;
+#header-container {
+  background-color: #eeecec;
+  text-align: center;
+}
+.header {
+  text-shadow: 10px 5px #d5d3d3;
 }
 
+.slogan {
+}
 /* Navbar */
 
 /* #nav-bar {
