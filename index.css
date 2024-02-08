@@ -1,3 +1,5 @@
+/* header */
+
 #header-container {
   background-color: #eeecec;
   text-align: center;
@@ -9,6 +11,14 @@
 .slogan {
 }
 /* Navbar */
+
+#home-link:visited {
+  color: white;
+}
+
+#home-link {
+  text-decoration: none;
+}
 
 /* #nav-bar {
 }

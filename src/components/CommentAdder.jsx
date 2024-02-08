@@ -3,6 +3,7 @@ import { postNewComment } from "../utils/post";
 import UserContext from "../contexts/UserContext";
 import { Box } from "@mui/material";
 import { getCommentsById } from "../utils/get";
+import Loading from "./Loading";
 
 export default function CommentAdder({
   articleId,
@@ -15,6 +16,7 @@ export default function CommentAdder({
   const [newCommentVotes, setNewCommentVotes] = useState(0);
   const [newCommentArticleId, setNewCommentArticleId] = useState(articleId);
   const [err, setErr] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -31,6 +33,7 @@ export default function CommentAdder({
         ? setErr("Error: Please type in a comment of at least 10 characters")
         : postNewComment(newCommentArticleId, newCommentObject)
             .then((response) => {
+              setLoading(true);
               setIsDisabled(true);
               if (response.message === "Network Error") {
                 setErr("Could not connect. Please try again");
@@ -39,11 +42,13 @@ export default function CommentAdder({
               setErr(null);
               getCommentsById(newCommentArticleId).then((response) => {
                 setCommentsList(response);
+                setIsDisabled(false);
+                setLoading(false);
               });
-              setIsDisabled(false);
             })
             .catch((err) => {
               setIsDisabled(false);
+              setisLoading(false);
               setErr(
                 "Could not post comment. Please refresh the page and try again"
               );
@@ -51,11 +56,14 @@ export default function CommentAdder({
       setNewCommentBody("");
     }
   }
+
   return (
     <>
       <Box className="comment-adder-box">
         <h2>Post a comment</h2>
         <form onSubmit={handleSubmit}>
+          {" "}
+          {loading ? <Loading /> : null}
           <label htmlFor="commentBody">Enter your comment here:</label>
           <input
             className="commentBody"
@@ -64,7 +72,6 @@ export default function CommentAdder({
             value={newCommentBody}
             onChange={(event) => setNewCommentBody(event.target.value)}
           ></input>
-
           {isDisabled ? (
             <button disabled={true} className="submitButton">
               Submit

@@ -23,12 +23,12 @@ export default function IndividualArticle() {
       });
     getCommentsById(article_id)
       .then((response) => {
+        setLoading(false);
         setCommentsList(response);
       })
       .catch((err) => {
         setErr("Article does not exist");
       });
-    setLoading(false);
   }, []);
 
   if (err) return <p>{err}</p>;
