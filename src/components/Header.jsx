@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <Container id="header">
       <Box className="header">
-        <Typography variant="h1" fontWeight={400}>
+        <Typography variant="h1" fontWeight={400} sx={{ padding: 5 }}>
           Tiah's News
         </Typography>
       </Box>
