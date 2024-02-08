@@ -10,7 +10,7 @@ export function getAllArticles(limit, topic, sort_by, order) {
       return response.data.articles;
     })
     .catch((err) => {
-      console.log(err);
+      return err;
     });
 }
 
@@ -21,23 +21,13 @@ export function getAllTopics() {
 }
 
 export function getArticleById(articleId) {
-  return newsApi
-    .get(`/articles/${articleId}`)
-    .then((response) => {
-      return response.data.article;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  return newsApi.get(`/articles/${articleId}`).then((response) => {
+    return response.data.article;
+  });
 }
 
 export function getCommentsById(articleId) {
-  return newsApi
-    .get(`/articles/${articleId}/comments`)
-    .then((response) => {
-      return response.data.comments;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  return newsApi.get(`/articles/${articleId}/comments`).then((response) => {
+    return response.data.comments;
+  });
 }

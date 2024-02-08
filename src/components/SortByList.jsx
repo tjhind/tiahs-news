@@ -13,7 +13,7 @@ export default function SortByList({
   return (
     <Container id="sortby-list-container">
       <Grid container spacing={2} justify="center" id="sort-by-grid">
-        <Grid item className="sort-by-box">
+        <Grid item="true" className="sort-by-box">
           <h2>Sort by:</h2>
           <Select
             variant="outlined"
@@ -36,7 +36,7 @@ export default function SortByList({
             <MenuItem value="comment_count">Comments</MenuItem>
           </Select>
         </Grid>
-        <Grid item className="sort-by-box">
+        <Grid item="true" className="sort-by-box">
           <h2>Topics:</h2>
           <ButtonGroup
             variant="outlined"
@@ -64,7 +64,7 @@ export default function SortByList({
             })}{" "}
           </ButtonGroup>
         </Grid>
-        <Grid item className="sort-by-box">
+        <Grid item="true" className="sort-by-box">
           <h2>Order by:</h2>
           <ButtonGroup
             variant="outlined"

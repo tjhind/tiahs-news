@@ -19,11 +19,15 @@ export default function IndividualArticle() {
         setArticleDetails(response);
       })
       .catch((err) => {
-        setErr("Could not connect. Please try again");
+        setErr("Article does not exist");
       });
-    getCommentsById(article_id).then((response) => {
-      setCommentsList(response);
-    });
+    getCommentsById(article_id)
+      .then((response) => {
+        setCommentsList(response);
+      })
+      .catch((err) => {
+        setErr("Article does not exist");
+      });
     setLoading(false);
   }, [commentsList]);
 
@@ -31,43 +35,47 @@ export default function IndividualArticle() {
   if (loading) return <Loading />;
 
   return (
-    <Box className="individual-article-container">
-      <Box className="individual-article-box">
-        <Typography variant="h4">
-          <>{articleDetails.title}</>
-        </Typography>
-      </Box>{" "}
-      <Box className="individual-article-box">
-        <img
-          src={articleDetails.article_img_url}
-          alt={`stock image to do with ${articleDetails.topic}`}
-        ></img>
-      </Box>
-      <Box className="individual-article-box">
-        <Typography variant="h6">
-          <>{articleDetails.body}</>
-        </Typography>
-      </Box>
-      <Box className="individual-article-box">
-        <Typography variant="h6">
-          <>Author: {articleDetails.author}</>
-        </Typography>
-      </Box>
-      <Box className="individual-article-box">
-        <Typography>
-          <>Comments: {articleDetails.comment_count}</>
-        </Typography>
-      </Box>
-      <ArticleVotes articleId={article_id} votes={articleDetails.votes} />
-      <CommentAdder
-        articleId={article_id}
-        setCommentsList={setCommentsList}
-        commentsList={commentsList}
-      />
-      <CommentList
-        commentsList={commentsList}
-        setCommentsList={setCommentsList}
-      />
-    </Box>
+    <>
+      {err ? (
+        <>p{err}</>
+      ) : (
+        <>
+          <Typography variant="h4">
+            <>{articleDetails.title}</>
+          </Typography>{" "}
+          <Box className="individual-article-box">
+            <img
+              src={articleDetails.article_img_url}
+              alt={`stock image to do with ${articleDetails.topic}`}
+            ></img>
+          </Box>
+          <Box className="individual-article-box">
+            <Typography variant="h6">
+              <>{articleDetails.body}</>
+            </Typography>
+          </Box>
+          <Box className="individual-article-box">
+            <Typography variant="h6">
+              <>Author: {articleDetails.author}</>
+            </Typography>
+          </Box>
+          <Box className="individual-article-box">
+            <Typography>
+              <>Comments: {articleDetails.comment_count}</>
+            </Typography>
+          </Box>
+          <ArticleVotes articleId={article_id} votes={articleDetails.votes} />
+          <CommentAdder
+            articleId={article_id}
+            setCommentsList={setCommentsList}
+            commentsList={commentsList}
+          />
+          <CommentList
+            commentsList={commentsList}
+            setCommentsList={setCommentsList}
+          />{" "}
+        </>
+      )}
+    </>
   );
 }
