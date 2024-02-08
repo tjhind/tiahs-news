@@ -29,7 +29,7 @@ export default function IndividualArticle() {
         setErr("Article does not exist");
       });
     setLoading(false);
-  }, [commentsList]);
+  }, []);
 
   if (err) return <p>{err}</p>;
   if (loading) return <Loading />;

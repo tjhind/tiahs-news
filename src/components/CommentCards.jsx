@@ -16,22 +16,29 @@ export default function CommentCards({
   const [disabled, setDisabled] = useState(false);
 
   function handleClick() {
+    setSuccess(null);
     setDisabled(true);
+    setErr(null);
 
     deleteOwnComment(comment.comment_id).then((response) => {
+      setDisabled(false);
+      setSuccess("Comment successfully deleted!");
       setCommentsList(
         commentsList.filter((item) => item.comment_id !== comment.comment_id)
       );
-      setDisabled(false);
+
       if (response.code === "ERR_BAD_REQUEST") {
-        setErr("Could not delete comment! Please try again.");
-      } else setSuccess("Comment successfully deleted!");
+        setErr("Could not delete comment! Please try again");
+      }
     });
   }
-  if (err) return <p>{err}</p>;
-  if (success) return <p>{success}</p>;
+
   return (
     <Box className="comment-box">
+      <Box className="response-box">
+        {" "}
+        {err ? <p>{err}</p> : success ? <p>{success}</p> : null}
+      </Box>{" "}
       <Paper elevation={3}>
         <Typography variant="h6">
           <p className="body">{comment.body}</p>

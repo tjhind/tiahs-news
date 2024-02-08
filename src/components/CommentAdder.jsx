@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { postNewComment } from "../utils/post";
 import UserContext from "../contexts/UserContext";
 import { Box } from "@mui/material";
+import { getCommentsById } from "../utils/get";
 
 export default function CommentAdder({
   articleId,
@@ -19,6 +20,7 @@ export default function CommentAdder({
 
   function handleSubmit(event) {
     event.preventDefault();
+    setSuccess(null);
     let newCommentObject = {};
     newCommentObject.body = newCommentBody;
     newCommentObject.username = newCommentAuthor;
@@ -35,7 +37,9 @@ export default function CommentAdder({
               }
               setSuccess("Your comment has been posted!");
               setErr(null);
-              setCommentsList([...commentsList], [newCommentObject]);
+              getCommentsById(newCommentArticleId).then((response) => {
+                setCommentsList(response);
+              });
               setIsDisabled(false);
             })
             .catch((err) => {
