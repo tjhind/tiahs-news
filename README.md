@@ -30,6 +30,8 @@ To clone the repo you'll need to have a local version of [git](https://git-scm.c
    `cd tiahs-news`
    And then open the repo in your favourite code editor.
 
-2. Run `npm run dev` to run the app. This should connect to your local server and allow you to host the application.
+2. Run `npm install` to install the dependencies you will need to run the app.
+
+3. Run `npm run dev` to run the app. This should connect to your local server and allow you to host the application.
 
 **Enjoy! Please feel free to share any feedback by raising an issue on github or sending me a message.**
