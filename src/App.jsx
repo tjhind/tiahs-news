@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import HomepageManager from "./components/HomepageManager";
 import { Container, CssBaseline } from "@mui/material";
 import IndividualArticle from "./components/IndividualArticle";
+import NonexistentPath from "./components/NonexistentPath";
 import UserContext from "./contexts/UserContext";
 import { useState } from "react";
 
@@ -25,6 +26,7 @@ function App() {
                 path="/articles/:article_id"
                 element={<IndividualArticle />}
               />
+              <Route path="*" element={<NonexistentPath />} />
             </Routes>
           </UserContext.Provider>
         </Container>
