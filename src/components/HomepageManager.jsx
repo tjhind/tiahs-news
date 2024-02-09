@@ -12,6 +12,7 @@ export default function HomepageManager() {
   const [topicSearchTerm, setTopicSearchTerm] = useSearchParams();
   const [sortByTerm, setSortByTerm] = useSearchParams();
   const [orderByTerm, setOrderByTerm] = useSearchParams();
+  const [open, setOpen] = useState(false);
 
   const limit = "10";
   const topic = topicSearchTerm.get("topic");
@@ -22,18 +23,21 @@ export default function HomepageManager() {
     const newTopicTerm = new URLSearchParams(topicSearchTerm);
     newTopicTerm.set("topic", topic);
     setTopicSearchTerm(newTopicTerm);
+    setLoading(true);
   };
 
   const setSortBy = (sort_by) => {
     const newSortBy = new URLSearchParams(sortByTerm);
     newSortBy.set("sort_by", sort_by);
     setSortByTerm(newSortBy);
+    setLoading(true);
   };
 
   const setSortOrder = (order) => {
     const newSortOrder = new URLSearchParams(orderByTerm);
     newSortOrder.set("order", order);
     setOrderByTerm(newSortOrder);
+    setLoading(true);
   };
 
   useEffect(() => {
@@ -61,6 +65,8 @@ export default function HomepageManager() {
         sort_by={sort_by}
         order={order}
         setSortOrder={setSortOrder}
+        open={open}
+        setOpen={setOpen}
       />
       <ArticleList articleList={articleList} topic={topic} />
     </>

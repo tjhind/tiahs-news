@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { postNewComment } from "../utils/post";
 import UserContext from "../contexts/UserContext";
-import { Box } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
 import { getCommentsById } from "../utils/get";
 import Loading from "./Loading";
 
@@ -60,26 +60,38 @@ export default function CommentAdder({
   return (
     <>
       <Box className="comment-adder-box">
-        <h2>Post a comment</h2>
+        <h2>Post a comment:</h2>
         <form onSubmit={handleSubmit}>
           {" "}
           {loading ? <Loading /> : null}
-          <label htmlFor="commentBody">Enter your comment here:</label>
-          <input
+          <TextField
             className="commentBody"
+            multiline
+            rows={2}
             type="text"
             id="commentBody"
             value={newCommentBody}
+            fullWidth
             onChange={(event) => setNewCommentBody(event.target.value)}
-          ></input>
+          />
           {isDisabled ? (
-            <button disabled={true} className="submitButton">
+            <Button
+              type="submit"
+              disabled={true}
+              className="submitButton"
+              sx={{ mb: 2, mt: 2 }}
+            >
               Submit
-            </button>
+            </Button>
           ) : (
-            <button disabled={false} className="submitButton">
+            <Button
+              type="submit"
+              disabled={false}
+              className="submitButton"
+              sx={{ mb: 2, mt: 2 }}
+            >
               Submit
-            </button>
+            </Button>
           )}
         </form>
         {err ? <p>{err}</p> : null} {success ? <p>{success}</p> : null}

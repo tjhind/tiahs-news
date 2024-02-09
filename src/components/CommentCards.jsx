@@ -2,7 +2,6 @@ import { Box, Typography, Paper, Button } from "@mui/material";
 import { deleteOwnComment } from "../utils/delete";
 import { useContext, useState } from "react";
 import UserContext from "../contexts/UserContext";
-import Loading from "./Loading";
 
 export default function CommentCards({
   comment,
@@ -37,29 +36,34 @@ export default function CommentCards({
   }
 
   return (
-    <Box className="comment-box">
+    <>
       <Box className="response-box">
         {" "}
         {err ? <p>{err}</p> : success ? <p>{success}</p> : null}
       </Box>{" "}
-      <Paper elevation={3}>
-        <Typography variant="h6">
+      <Box className="comment"></Box>
+      <Paper
+        id="comment"
+        variant="outlined"
+        sx={{ mb: 0, mt: 2, p: 2 }}
+      >
+        <Typography variant="h7" fontWeight={500}>
           <p className="body">{comment.body}</p>
         </Typography>
-        <Typography variant="h6">
-          <p className="author">{comment.author}</p>
+        <Typography color="grey" variant="h7" fontWeight={500}>
+          -{comment.author}
         </Typography>
       </Paper>
       {comment.author === username ? (
         <Button
+          sx={{ p: 0 }}
           disabled={disabled}
           className="delete-button"
           onClick={handleClick}
         >
-          {loading ? <Loading /> : null}
-          Delete your comment
+          {loading ? "Loading..." : "Delete your comment"}
         </Button>
       ) : null}{" "}
-    </Box>
+    </>
   );
 }

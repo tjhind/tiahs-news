@@ -6,7 +6,7 @@ import { Box, Typography } from "@mui/material";
 export default function CommentList({ commentsList, setCommentsList }) {
   return (
     <Box className="comment-list-container">
-      <Typography variant="h5">Comments</Typography>
+      <Typography variant="h5">Comments ({commentsList.length})</Typography>
       <ol id="comment-list">
         {commentsList.map((comment, i) => {
           return (

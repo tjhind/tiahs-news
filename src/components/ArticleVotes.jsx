@@ -1,6 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
 import { upvoteArticle } from "../utils/patch";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import { ThumbDownAlt } from "@mui/icons-material";
 
 export default function ArticleVotes({ votes, articleId }) {
   const [err, setErr] = useState(null);
@@ -58,40 +60,48 @@ export default function ArticleVotes({ votes, articleId }) {
 
   return (
     <>
-      <Box className="individual-article-box">
-        <Typography variant="h6">
+      <Grid
+        item={true}
+        sm={12}
+        md={12}
+        lg={12}
+        xl={12}
+        sx={{ pr: 10 }}
+        className="individual-article-box"
+      >
+        <Typography variant="h6" sx={{ mr: 3 }}>
           <>Votes: {articleVotes}</>
-        </Typography>
-      </Box>
-      <Box className="individual-article-box">
-        {" "}
+        </Typography>{" "}
         {err ? <p>{err}</p> : null}
         {upvoteClicked === false && downvoteClicked === false ? (
           <>
-            <button onClick={handleClickUpvote}> UPVOTE ARTICLE (+1)</button>
+            <Button onClick={handleClickUpvote}>
+              {" "}
+              <ThumbUpAltIcon fontSize="large" />
+            </Button>
           </>
         ) : downvoteClicked === true && upvoteClicked === false ? (
-          <button disabled={true} onClick={handleClickUpvote}>
+          <Button disabled={true} onClick={handleClickUpvote}>
             {" "}
-            UPVOTE ARTICLE (+1)
-          </button>
+            <ThumbUpAltIcon fontSize="large" />
+          </Button>
         ) : (
-          <button onClick={handleClickUndoUpvote}> UNDO</button>
-        )}
-      </Box>
-      <Box className="individual-article-box">
-        {" "}
+          <Button onClick={handleClickUndoUpvote}> UNDO</Button>
+        )}{" "}
         {downvoteClicked === false && upvoteClicked === false ? (
-          <button onClick={handleClickDownvote}> DOWNVOTE ARTICLE (-1)</button>
-        ) : downvoteClicked === false && upvoteClicked === true ? (
-          <button disabled={true} onClick={handleClickDownvote}>
+          <Button onClick={handleClickDownvote}>
             {" "}
-            DOWNVOTE ARTICLE (+1)
-          </button>
+            <ThumbDownAlt fontSize="large" />
+          </Button>
+        ) : downvoteClicked === false && upvoteClicked === true ? (
+          <Button disabled={true} onClick={handleClickDownvote}>
+            {" "}
+            <ThumbDownAlt fontSize="large" />
+          </Button>
         ) : (
-          <button onClick={handleClickUndoDownvote}> UNDO</button>
+          <Button onClick={handleClickUndoDownvote}> UNDO</Button>
         )}
-      </Box>
+      </Grid>
     </>
   );
 }

@@ -12,6 +12,14 @@
 }
 /* Navbar */
 
+#sortby-list-container {
+  max-width: 100%;
+}
+
+#avatar {
+  max-width: 5%;
+}
+
 #home-link:visited {
   color: white;
 }
@@ -20,13 +28,51 @@
   text-decoration: none;
 }
 
-/* #nav-bar {
+.my-toolbar {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#logged-in-user {
-  font-weight: 600;
-} */
+.home,
+.user {
+  flex-basis: 92%;
+}
+
+.user {
+  text-align: right;
+  color: white;
+  text-decoration: none;
+}
+
+#avatar {
+  vertical-align: middle;
+  max-width: 70px;
+  max-height: 50px;
+  border-radius: 20%;
+  margin-left: 20px;
+}
+*/
 
 /* SortBy list */
 
-/* Article list */
+/* Article cards */
+
+#article-link:visited {
+  color: black;
+}
+
+#article-link {
+  text-decoration: none;
+  color: black;
+}
+
+/* Individual Article */
+#article-image {
+  border-radius: 10px;
+  max-width: 90%;
+}
+
+/* Comment List */
+#comment {
+  background-color: #eeeeee;
+}

@@ -30,13 +30,11 @@ export default function ArticleList({ articleList, topic }) {
           </Typography>
         )}{" "}
       </Container>
-      <Grid className="article-list-grid">
-        <ol id="article-list">
-          {articleList.map((article, i) => {
-            return <ArticleCards key={i} article={article} />;
-          })}
-        </ol>
-      </Grid>{" "}
+      <Grid container={true}>
+        {articleList.map((article, i) => {
+          return <ArticleCards key={i} article={article} />;
+        })}
+      </Grid>
     </>
   );
 }

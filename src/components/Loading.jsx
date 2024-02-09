@@ -12,9 +12,9 @@ export default function Loading({ loading }) {
       justifyContent="center"
       sx={{ minHeight: "100vh" }}
     >
-      <Grid item xs={3}>
+      <Grid item xs={3} sx={{ mb: 2 }}>
         {" "}
-        <Typography variant="h4">Loading, Please Wait</Typography>{" "}
+        <Typography variant="h5">Loading, Please Wait</Typography>{" "}
       </Grid>{" "}
       <Grid item xs={3}>
         {" "}

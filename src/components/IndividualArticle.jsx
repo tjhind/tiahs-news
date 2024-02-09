@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { getArticleById, getCommentsById } from "../utils/get";
 import { useParams } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Grid, Paper } from "@mui/material";
 import CommentList from "./CommentList";
 import ArticleVotes from "./ArticleVotes";
 import CommentAdder from "./CommentAdder";
 import Loading from "./Loading";
+
 export default function IndividualArticle() {
   const [articleDetails, setArticleDetails] = useState([]);
   const [commentsList, setCommentsList] = useState([]);
@@ -19,7 +20,7 @@ export default function IndividualArticle() {
         setArticleDetails(response);
       })
       .catch((err) => {
-        setErr("Article does not exist");
+        setErr("Could not load article");
       });
     getCommentsById(article_id)
       .then((response) => {
@@ -27,7 +28,7 @@ export default function IndividualArticle() {
         setCommentsList(response);
       })
       .catch((err) => {
-        setErr("Article does not exist");
+        setErr("Could not load article");
       });
   }, []);
 
@@ -40,31 +41,53 @@ export default function IndividualArticle() {
         <>p{err}</>
       ) : (
         <>
-          <Typography variant="h4">
+          <Typography
+            variant="h4"
+            align="center"
+            fontWeight={500}
+            sx={{ p: 4, textTransform: "uppercase" }}
+          >
             <>{articleDetails.title}</>
           </Typography>{" "}
-          <Box className="individual-article-box">
-            <img
-              src={articleDetails.article_img_url}
-              alt={`stock image to do with ${articleDetails.topic}`}
-            ></img>
-          </Box>
-          <Box className="individual-article-box">
-            <Typography variant="h6">
-              <>{articleDetails.body}</>
-            </Typography>
-          </Box>
-          <Box className="individual-article-box">
-            <Typography variant="h6">
-              <>Author: {articleDetails.author}</>
-            </Typography>
-          </Box>
-          <Box className="individual-article-box">
-            <Typography>
-              <>Comments: {articleDetails.comment_count}</>
-            </Typography>
-          </Box>
-          <ArticleVotes articleId={article_id} votes={articleDetails.votes} />
+          <Grid container>
+            <Grid
+              item={true}
+              align="center"
+              className="individual-article-box"
+              sm={12}
+              md={6}
+              lg={6}
+              xl={6}
+              sx={{ pr: 0 }}
+            >
+              <img
+                id="article-image"
+                src={articleDetails.article_img_url}
+                alt={`stock image about ${articleDetails.topic}`}
+              ></img>
+            </Grid>{" "}
+            <Grid
+              item={true}
+              align="justify"
+              sx={{ pb: 2 }}
+              sm={12}
+              md={6}
+              lg={6}
+              xl={6}
+            >
+              <Box sx={{ pb: 4 }}>
+                <Typography variant="h7" sx={{ lineHeight: 2 }}>
+                  <>{articleDetails.body}</>
+                </Typography>
+              </Box>
+              <Typography variant="h6">
+                <>Author: {articleDetails.author}</>
+              </Typography>
+            </Grid>{" "}
+          </Grid>
+          <Grid container spacing={0} align="right">
+            <ArticleVotes articleId={article_id} votes={articleDetails.votes} />
+          </Grid>
           <CommentAdder
             articleId={article_id}
             setCommentsList={setCommentsList}
