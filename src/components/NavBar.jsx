@@ -9,22 +9,32 @@ export default function NavBar() {
   const loggedInUser = useContext(UserContext);
 
   return (
-    <AppBar position="relative">
-      <Toolbar>
-        <FeedIcon sx={{ mr: 1 }} />
+    <AppBar position="relative" >
+      <Toolbar className="my-toolbar" sx={{ boxShadow: 3 }}>
         <Link
           id="home-link"
           key="Home-link"
           onClick={() => (window.location.href = "/")}
         >
-          <Typography variant="h6" fontWeight={400}>
-            Home{" "}
+          <Typography variant="h6" fontWeight={400} className="home">
+            HOME{" "}
           </Typography>
         </Link>
-        <AccountCircleIcon />
-        <Typography fontWeight={350} sx={{ ml: 15 }} variant="h6">
+
+        <Typography
+          fontWeight={400}
+          sx={{ p: 0 }}
+          variant="h6"
+          className="user"
+        >
           {" "}
-          Current User: {` ${loggedInUser.username}`}
+          <Link to="/switchUser" className="user">
+            {" "}
+            HEY {` ${loggedInUser.username}`}!
+          </Link>
+          <Link to="/switchUser" className="user">
+            <img id="avatar" src={loggedInUser.avatar_url} />
+          </Link>
         </Typography>
       </Toolbar>
     </AppBar>
