@@ -2,10 +2,10 @@
 
 Welcome!
 
-This project is a summary of everything I learnt during the frontend portion of the Northcoders' bootcamp.
+This project is a summary of everything I learnt during the frontend portion of the Northcoders bootcamp.
 
-This is a front-end React application which connects to the backend API that I built previously ([view it by clicking on this link](https://github.com/tjhind/nc-news)) to aggregate news articles, topics, and comments from a database. For styling (still under construction), I used a mix of the MUI react component library and CSS.
-There is functionality for the user to interact with the database, such as inserting and deleting new comments, and being able to up/downvote articles. Users can also seamlessly sort through articles to only view articles of a certain topic, as well as being able to sort the articles by date, votes, comment count, author, and title.
+This is a frontend React application which connects to the backend API that I built previously ([view it by clicking on this link](https://github.com/tjhind/nc-news)) to aggregate news articles, topics, and comments from a database. For styling (still under construction), I used a mix of the MUI react component library and CSS.
+There is functionality for the user to interact with the database, such as inserting and deleting new comments, and being able to up/downvote articles. Users can also seamlessly sort through articles to only view articles of a certain topic, as well as being able to sort the articles by date, votes, comment count, author, and title. The UI has been designed to be responsive. 
 
 ### [Hosted version: take a look!](https://tiahsnews.netlify.app/)
 
@@ -15,7 +15,7 @@ _may be slow to load on first access due to spinning down after inactivity_
 
 **PLEASE NOTE:**
 
-In order to run this API, you will need to have installed [**Node.js and NPM**\*](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+In order to run this app, you will need to have installed [**Node.js and NPM**\*](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 \* >= V21.5.0 & V10.2.4 respectively
 
