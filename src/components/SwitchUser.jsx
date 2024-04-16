@@ -1,8 +1,33 @@
-import UserContext from "../contexts/UserContext";
-import { useContext } from "react";
-
+import { getAllUsers } from "../utils/get";
+import { useState, useEffect } from "react";
+import { Typography, Grid } from "@mui/material";
+import UserCards from "./UserCards";
 export default function SwitchUser() {
-  const { username, setLoggedInUser, avatar_url } = useContext(UserContext);
+  const [userList, setUserList] = useState([]);
 
-  return <p>hello</p>;
+  useEffect(() => {
+    getAllUsers().then((response) => {
+      setUserList(response);
+    });
+  }, []);
+  return (
+    <>
+      {" "}
+      <Typography variant="h4" align="center" sx={{ pt: 2 }}>
+        Click on a profile to change user
+      </Typography>
+      <Grid
+        container
+        item={true}
+        className="user-box"
+        spacing={2}
+        align="center"
+        sx={{ pt: 6 }}
+      >
+        {userList.map((user, i) => {
+          return <UserCards key={i} user={user} />;
+        })}
+      </Grid>
+    </>
+  );
 }

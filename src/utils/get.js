@@ -1,7 +1,7 @@
 import axios from "axios";
 const newsApi = axios.create({ baseURL: "https://news-rpsp.onrender.com/api" });
 
-export function getAllArticles(limit, topic, sort_by, order) {
+export function getAllArticles(limit, topic, sort_by, order, p) {
   return newsApi
     .get("/articles/", {
       params: { limit: limit, topic: topic, sort_by: sort_by, order: order },
@@ -29,5 +29,11 @@ export function getArticleById(articleId) {
 export function getCommentsById(articleId) {
   return newsApi.get(`/articles/${articleId}/comments`).then((response) => {
     return response.data.comments;
+  });
+}
+
+export function getAllUsers() {
+  return newsApi.get(`/users`).then((response) => {
+    return response.data.users;
   });
 }

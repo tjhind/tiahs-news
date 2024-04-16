@@ -12,10 +12,12 @@ export default function HomepageManager() {
   const [topicSearchTerm, setTopicSearchTerm] = useSearchParams();
   const [sortByTerm, setSortByTerm] = useSearchParams();
   const [orderByTerm, setOrderByTerm] = useSearchParams();
+  const [pTerm, setpTerm] = useSearchParams();
   const [open, setOpen] = useState(false);
 
   const limit = "10";
   const topic = topicSearchTerm.get("topic");
+  const p = pTerm.get("p") || 1;
   const sort_by = sortByTerm.get("sort_by");
   const order = sortByTerm.get("order");
 
@@ -23,6 +25,13 @@ export default function HomepageManager() {
     const newTopicTerm = new URLSearchParams(topicSearchTerm);
     newTopicTerm.set("topic", topic);
     setTopicSearchTerm(newTopicTerm);
+    setLoading(true);
+  };
+
+  const setP = (p) => {
+    const newPTerm = new URLSearchParams(pTerm);
+    newPTerm.set("p", p);
+    setpTerm(newPTerm);
     setLoading(true);
   };
 
@@ -48,7 +57,7 @@ export default function HomepageManager() {
   }, [articleList]);
 
   useEffect(() => {
-    getAllArticles(limit, topic, sort_by, order).then((response) => {
+    getAllArticles(limit, topic, sort_by, order, p).then((response) => {
       setArticleList(response);
       setLoading(false);
     });
@@ -68,7 +77,7 @@ export default function HomepageManager() {
         open={open}
         setOpen={setOpen}
       />
-      <ArticleList articleList={articleList} topic={topic} />
+      <ArticleList articleList={articleList} topic={topic} />{" "}
     </>
   );
 }

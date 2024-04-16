@@ -85,7 +85,7 @@ export default function IndividualArticle() {
               </Typography>
             </Grid>{" "}
           </Grid>
-          <Grid container spacing={0} align="right">
+          <Grid container spacing={0} sx={{pt: 2, pl: 4}}>
             <ArticleVotes articleId={article_id} votes={articleDetails.votes} />
           </Grid>
           <CommentAdder

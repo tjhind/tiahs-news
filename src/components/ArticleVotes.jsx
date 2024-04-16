@@ -70,7 +70,11 @@ export default function ArticleVotes({ votes, articleId }) {
         className="individual-article-box"
       >
         <Typography variant="h6" sx={{ mr: 3 }}>
-          <>Votes: {articleVotes}</>
+          {articleVotes === 0 ? (
+            <>Be the first to vote!</>
+          ) : (
+            <>Votes: {articleVotes}</>
+          )}
         </Typography>{" "}
         {err ? <p>{err}</p> : null}
         {upvoteClicked === false && downvoteClicked === false ? (
